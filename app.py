@@ -16,6 +16,7 @@ import sys, random
 import tempfile
 import requests
 import re
+import random
 
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
@@ -62,7 +63,12 @@ def handle_message(event):
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
     
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text="masuk"))
+    a = random.randint(0,10)
+    if(a%2):
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Iya"))
+    else:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Tidak"))
+    #line_bot_api.reply_message(event.reply_token,TextSendMessage(text="masuk"))
     
 import os
 if __name__ == "__main__":
