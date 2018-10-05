@@ -42,21 +42,6 @@ handler = WebhookHandler('c74db2f3b611a0c6f4651d231dc71fdb')
 notes = {}
 
 #REQUEST DATA MHS
-def carimhs(input):
-    URLmhs = "https://www.pricelist.padmapratama.com/api/mhs.php?nrp=" + input
-    irham = requests.get(URLmhs)
-    data = irham.json()
-    err = "data tidak ditemukan"
-    
-    flag = data['kode']
-    if(flag == "1"):
-        nrp = data['data_angkatan'][0]['nrp']
-        nama = data['data_angkatan'][0]['nama']
-        kos = data['data_angkatan'][0]['kosan']
-
-        return nama + '\n' + nrp + '\n' + kos
-    elif(flag == "0"):
-        return err    
 
 # Post Request
 @app.route("/callback", methods=['POST'])
@@ -76,8 +61,8 @@ def handle_message(event):
     sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=carimhs(text)))
-    #line_bot_api.reply_message(event.reply_token,TextSendMessage(text="masuk"))
+    
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text="masuk"))
     
 import os
 if __name__ == "__main__":
