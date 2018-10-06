@@ -1,1 +1,1 @@
-# LineBot
+# LinBot
