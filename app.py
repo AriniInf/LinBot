@@ -98,6 +98,8 @@ def handle_message(event):
     data=text.split('-')
     if(data[0]=='lihat'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
+    elif(data[0]=='insert'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1],data[2],data[3])))
 import os
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
