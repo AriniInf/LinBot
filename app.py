@@ -84,8 +84,8 @@ def handle_message(event):
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=carimhs(text)))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text="masuk"))
     data=text.split('-')
-    #if(data[0]=='lihat'):
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
+    if(data[0]=='lihat'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
 import os
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
