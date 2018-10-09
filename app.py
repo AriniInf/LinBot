@@ -52,7 +52,7 @@ def carimhs(input):
     if(flag == "1"):
         nrp = data['data_angkatan'][0]['nrp']
         nama = data['data_angkatan'][0]['nama']
-        kos = data['data_angkatan'][0]['kosan']
+        kos = data['data_angkatan'][0]['alamat']
 
         return nama + '\n' + nrp + '\n' + kos
     elif(flag == "0"):
