@@ -61,7 +61,19 @@ def carimhs(nrp):
         # return all_data
 
     elif(flag == "0"):
-        return err  
+        return err 
+#INPUT DATA MHS
+def inputmhs(nrp, nama, kosan):
+    r = requests.post("http://www.aditmasih.tk/api_ariniinf/insert.php", data={'NRP': nrp, 'Nama': nama, 'Alamat': kosan})
+    data = r.json()
+
+    flag = data['flag']
+   
+    if(flag == "1"):
+        return 'Data '+nama+' berhasil dimasukkan\n'
+    elif(flag == "0"):
+        return 'Data gagal dimasukkan\n'
+
 
 # Post Request
 @app.route("/callback", methods=['POST'])
