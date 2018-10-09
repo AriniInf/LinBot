@@ -76,7 +76,7 @@ def handle_message(event):
     sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=carimhs(text)))
+    #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=carimhs(text)))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text="masuk"))
     data=text.split('-')
     if(data[0]=='lihat'):
