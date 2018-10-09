@@ -63,8 +63,8 @@ def carimhs(nrp):
     elif(flag == "0"):
         return err 
 #INPUT DATA MHS
-def inputmhs(nrp, nama, kosan):
-    r = requests.post("http://www.aditmasih.tk/api_ariniinf/insert.php", data={'NRP': nrp, 'Nama': nama, 'Alamat': kosan})
+def inputmhs(nama, nrp, kosan):
+    r = requests.post("http://www.aditmasih.tk/api_ariniinf/insert.php", data={'Nama': nama, 'NRP': nrp, 'Alamat': kosan})
     data = r.json()
 
     flag = data['flag']
