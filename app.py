@@ -85,7 +85,7 @@ def hapusmhs(nrp):
     elif(flag == "0"):
         return 'Data gagal dihapus\n'
 #UPDATE
-def updatemhs(nrp,nama,kosan,nrpLama):
+def updatemhs(nama,nrp,kosan,nrpLama):
     URLmhs = "http://www.aditmasih.tk/api_ariniinf/view.php?nrp=" + nrpLama
     r = requests.get(URLmhs)
     data = r.json()
