@@ -84,6 +84,26 @@ def hapusmhs(nrp):
         return 'Data '+nrp+' berhasil dihapus\n'
     elif(flag == "0"):
         return 'Data gagal dihapus\n'
+#UPDATE
+def updatemhs(nrp,nama,kosan,nrpLama):
+    URLmhs = "http://www.aditmasih.tk/api_ariniinf/view.php?nrp=" + nrpLama
+    r = requests.get(URLmhs)
+    data = r.json()
+    err = "data tidak ditemukan"
+    nrp_lama=nrpLama
+    flag = data['flag']
+    if(flag == "1"):
+        r = requests.post("http://www.aditmasih.tk/api_ariniinf/update.php", data={ 'Nama': nama,'NRP': nrp, 'Alamat': kosan, 'NRP_lama':nrp_lama})
+        data = r.json()
+        flag = data['flag']
+
+        if(flag == "1"):
+            return 'Data '+nrp_lama+'berhasil diupdate\n'
+        elif(flag == "0"):
+            return 'Data gagal diupdate\n'
+
+    elif(flag == "0"):
+        return err
 
 # Post Request
 @app.route("/callback", methods=['POST'])
