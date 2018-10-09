@@ -50,9 +50,9 @@ def carimhs(input):
     
     flag = data['kode']
     if(flag == "1"):
-        nrp = data['data_angkatan'][0]['nrp']
-        nama = data['data_angkatan'][0]['nama']
-        kos = data['data_angkatan'][0]['alamat']
+        nrp = data['data_angkatan'][0]['NRP']
+        nama = data['data_angkatan'][0]['Nama']
+        kos = data['data_angkatan'][0]['Alamat']
 
         return nama + '\n' + nrp + '\n' + kos
     elif(flag == "0"):
