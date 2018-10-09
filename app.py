@@ -43,7 +43,7 @@ notes = {}
 
 #REQUEST DATA MHS
 def carimhs(input):
-    URLmhs = "https://www.aditmasih.tk/api_ariniinf/view.php?nrp=" + input
+    URLmhs = "https://www.aditmasih.tk/api_ariniinf/view.php?nrp=" + nrp
     irham = requests.get(URLmhs)
     data = irham.json()
     err = "data tidak ditemukan"
