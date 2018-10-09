@@ -75,7 +75,7 @@ def inputmhs(nama, nrp, kosan):
         return 'Data gagal dimasukkan\n'
 #DELETE DATA MHS
 def hapusmhs(nrp):
-    r = requests.post("http://www.aditmasih.tk/api_ariniinf/delete.php", data={'Nrp': nrp})
+    r = requests.post("http://www.aditmasih.tk/api_ariniinf/delete.php", data={'NRP': nrp})
     data = r.json()
 
     flag = data['flag']
