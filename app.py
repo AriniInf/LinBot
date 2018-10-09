@@ -16,7 +16,6 @@ import sys, random
 import tempfile
 import requests
 import re
-import random
 
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
@@ -36,13 +35,28 @@ from linebot.models import (
 app = Flask(__name__)
 
 # Channel Access Token
-line_bot_api = LineBotApi('bsm50AlkCUYtBXN1LAmT3lFY14/aLI+O5n/kQQrmiTqJ5ukj43qhzGiamcd8ar83I15ZYIlEGKq9HxdJ7OUtfzzH4QXTkmbnLQRO+4s/xfNOLVOAGmLDWzCl1p43p633t5BaIybGVA+d+Qbd/cPeGwdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi('nCheFomZPKA81EfMCsgkGDaLIWlGlRdX/i9N4JAa2Vvetw4iB0iKyhX9EushTlct8Xm14AjoAhxifXP1THdjBLoIxT6bruyTKY10+M2Ea5iX0p9zraG/0kFvirKsv4vFV7SyYR7IAuEJvSyzvQDwMAdB04t89/1O/w1cDnyilFU=')
 # Channel Secret
-handler = WebhookHandler('aad04b7b25a615c260c3c0b6a3f8352d')
+handler = WebhookHandler('a13be1528f294201578d36297fc549a6')
 #===========[ NOTE SAVER ]=======================
 notes = {}
 
 #REQUEST DATA MHS
+def carimhs(input):
+    URLmhs = "https://www.aditmasih.tk/api_ariniinf/view.php?nrp=" + input
+    irham = requests.get(URLmhs)
+    data = irham.json()
+    err = "data tidak ditemukan"
+    
+    flag = data['kode']
+    if(flag == "1"):
+        nrp = data['data_angkatan'][0]['nrp']
+        nama = data['data_angkatan'][0]['nama']
+        kos = data['data_angkatan'][0]['kosan']
+
+        return nama + '\n' + nrp + '\n' + kos
+    elif(flag == "0"):
+        return err    
 
 # Post Request
 @app.route("/callback", methods=['POST'])
@@ -62,10 +76,11 @@ def handle_message(event):
     sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
-     
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text + ' ' + profile.display_name))
-    
-    
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=carimhs(text)))
+    #line_bot_api.reply_message(event.reply_token,TextSendMessage(text="masuk"))
+    data=text.split('-')
+    if(data[0]=='lihat'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
 import os
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
