@@ -42,21 +42,26 @@ handler = WebhookHandler('aad04b7b25a615c260c3c0b6a3f8352d')
 notes = {}
 
 #REQUEST DATA MHS
-def carimhs(input):
-    URLmhs = "https://www.aditmasih.tk/api_ariniinf/view.php?nrp=" + nrp
-    irham = requests.get(URLmhs)
-    data = irham.json()
+def carimhs(nrp):
+    URLmhs = "http://www.aditmasih.tk/api_ariniinf/view.php?nrp=" + nrp
+    r = requests.get(URLmhs)
+    data = r.json()
     err = "data tidak ditemukan"
     
-    flag = data['kode']
+    flag = data['flag']
     if(flag == "1"):
         nrp = data['data_angkatan'][0]['NRP']
         nama = data['data_angkatan'][0]['Nama']
         kos = data['data_angkatan'][0]['Alamat']
 
-        return nama + '\n' + nrp + '\n' + kos
+        # munculin semua, ga rapi, ada 'u' nya
+        # all_data = data['data_angkatan'][0]
+        data= "Nama : "+nama+"\nNrp : "+nrp+"\nKosan : "+kos
+        return data
+        # return all_data
+
     elif(flag == "0"):
-        return err    
+        return err  
 
 # Post Request
 @app.route("/callback", methods=['POST'])
