@@ -46,7 +46,7 @@ def carimhs(nrp):
     URLmhs = "http://www.aditmasih.tk/api_ariniinf/view.php?nrp=" + nrp
     r = requests.get(URLmhs)
     data = r.json()
-    err = "data tidak ditemukan"
+    err = "Data not found"
     
     flag = data['flag']
     if(flag == "1"):
