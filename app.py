@@ -56,7 +56,7 @@ def carimhs(nrp):
 
         # munculin semua, ga rapi, ada 'u' nya
         # all_data = data['data_angkatan'][0]
-        data= "Nama : "+nama+"\nNRP : "+nrp+"\nAlamat_Kos : "+kos
+        data= "Name : "+nama+"\nNRP : "+nrp+"\nAddress : "+kos
         return data
         # return all_data
 
