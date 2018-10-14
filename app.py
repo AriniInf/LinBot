@@ -56,7 +56,7 @@ def carimhs(nrp):
 
         # munculin semua, ga rapi, ada 'u' nya
         # all_data = data['data_angkatan'][0]
-        data= "Nama : "+nama+"\nNRP : "+nrp+"\nKosan : "+kos
+        data= "Nama : "+nama+"\nNRP : "+nrp+"\nAlamat_Kos : "+kos
         return data
         # return all_data
 
@@ -70,9 +70,9 @@ def inputmhs(nama, nrp, kosan):
     flag = data['flag']
    
     if(flag == "1"):
-        return 'Data '+nama+' berhasil dimasukkan\n'
+        return 'Data '+nrp+' has been added succesfully\n'
     elif(flag == "0"):
-        return 'Data gagal dimasukkan\n'
+        return 'Data failed to be added\n'
 #DELETE DATA MHS
 def hapusmhs(nrp):
     r = requests.post("http://www.aditmasih.tk/api_ariniinf/delete.php", data={'NRP': nrp})
@@ -81,15 +81,15 @@ def hapusmhs(nrp):
     flag = data['flag']
    
     if(flag == "1"):
-        return 'Data '+nrp+' berhasil dihapus\n'
+        return 'Data '+nrp+' has been deleted succesfully\n'
     elif(flag == "0"):
-        return 'Data gagal dihapus\n'
+        return 'Data failed to be deleted\n'
 #UPDATE
 def updatemhs(nama,nrpLama,kosan, nrp):
     URLmhs = "http://www.aditmasih.tk/api_ariniinf/view.php?nrp=" + nrpLama
     r = requests.get(URLmhs)
     data = r.json()
-    err = "data tidak ditemukan"
+    err = "Data not found"
     nrp_lama=nrpLama
     flag = data['flag']
     if(flag == "1"):
@@ -98,9 +98,9 @@ def updatemhs(nama,nrpLama,kosan, nrp):
         flag = data['flag']
 
         if(flag == "1"):
-            return 'Data '+nrp_lama+'berhasil diupdate\n'
+            return 'Data '+nrp_lama+' has been updated successfully\n'
         elif(flag == "0"):
-            return 'Data gagal diupdate\n'
+            return 'Data failed to update\n'
 
     elif(flag == "0"):
         return err
