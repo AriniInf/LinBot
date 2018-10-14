@@ -126,13 +126,13 @@ def handle_message(event):
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=carimhs(text)))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text="masuk"))
     data=text.split('-')
-    if(data[0]=='lihat'):
+    if(data[0]=='View'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
-    elif(data[0]=='tambah'):
+    elif(data[0]=='Insert'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1],data[2],data[3])))
-    elif(data[0]=='hapus'):
+    elif(data[0]=='Delete'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=hapusmhs(data[1])))
-    elif(data[0]=='ganti'):
+    elif(data[0]=='Update'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=updatemhs(data[1],data[2],data[3],data[4])))
 import os
 if __name__ == "__main__":
