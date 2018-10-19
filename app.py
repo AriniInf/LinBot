@@ -55,8 +55,8 @@ def cariayatrandom()
         arti = data['surat']['arti']
         ket = data['surat']['keterangan']
 
-        data= "Nama Surat : "+nama+"\nAsma Surat : "+asma+"\nsuratke : "+surat+"\nAyat : "+ayat+"\nJumlah Ayat : "+jumayat+"\nArti : "+ teks+ "\nKeterangan" +ket
-        return data
+        data= "Nama Surat : "+nama+"\nAsma Surat : "+asma+"\nsuratke : "+surat+"\nAyat : "+ayat+"\nJumlah Ayat : "+jumayat+"\nArti : "+ arti+ "\nKeterangan" +ket
+        return (data)
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -76,8 +76,8 @@ def handle_message(event):
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
 
-    produk=text.split('-')
-    if(produk[0]=='lihat'):
+    data=text.split('-')
+    if(data[0]=='lihat'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=cariayatrandom()))
 
 import os
