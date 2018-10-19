@@ -42,21 +42,26 @@ handler = WebhookHandler('84c75e4b3368d5a69c83549fa955a461')
 #===========[ NOTE SAVER ]=======================
 notes = {}
 
-def cariayatrandom()
-    URLacak = "https://api.banghasan.com/quran/format/json/acak/pre"       
-        r = requests.get(URLacak)
-        data = r.json()
+def cariayat(reference)
+    URLayat = "http://api.alquran.cloud/ayah"+reference
+    r = requests.get(URLayat)
+    data = r.json()
 
-        surat = data['acak']['id']['surat']
-        ayat = data['acak']['id']['ayat']
-        nama = data['surat']['nama']
-        asma = data['surat']['asma']
-        jumayat = data['surat']['ayat']
-        arti = data['surat']['arti']
-        ket = data['surat']['keterangan']
+    status = data['status']
+    if(status == "ok"):
+        text = data['data']['text']
+        num = data['data']['surah']['number']
+        nem = data['data']['surah']['name']
+        englishName = data['data']['surah']['englishName']
+        engnemtran = data['data']['surah']['englishNameTranslation']
+        numofay = data['data']['surah']['numberOfAyahs']
+        rt = data['data']['surah']['revelationType']
 
-        data= "Nama Surat : "+nama+"\nAsma Surat : "+asma+"\nsuratke : "+surat+"\nAyat : "+ayat+"\nJumlah Ayat : "+jumayat+"\nArti : "+ arti+ "\nKeterangan" +ket
-        return (data)
+        data = "Text : "+text+"\nNama_Surat : "+englishName+"\nsuratke- : "+num+"\nAyatke- : "+numofay
+        return data
+
+    elif(status == "error"):
+        return (err)
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -78,7 +83,7 @@ def handle_message(event):
 
     data=text.split('-')
     if(data[0]=='lihat'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=cariayatrandom()))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=cariayat(data[1])))
 
 import os
 if __name__ == "__main__":
