@@ -35,8 +35,6 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-app = Flask(__name__)
-
 # Channel Access Token
 line_bot_api = LineBotApi('T+0+0kzZgup0S3wDUz7hEBPTXOyy+F6yXmuZfWFPlrmFW90hPOEa6ZOzKsQMpLU9A5FJp+nymQ241b4owCYkcBoDihA/uEp7n5SYrVZ0wJrA3m7C63IM+CZo3WaWxI76NfXGPcog+77ZICXZL8HXiwdB04t89/1O/w1cDnyilFU=')
 # Channel Secret
@@ -85,8 +83,8 @@ def handle_message(event):
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
 
-    produk=text.split('-')
-    if(produk[0]=='lihat'):
+    data=text.split('-')
+    if(data[0]=='lihat'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carisurat(data[1])))
 
 import os
