@@ -35,34 +35,38 @@ from linebot.models import (
 
 app = Flask(__name__)
 
+app = Flask(__name__)
+
 # Channel Access Token
-line_bot_api = LineBotApi('cJslMtdzSEUY1Yn2BOQ5/ANgkHNSd5PUXJ/8xTxDg94cEwGcc63UkqEOwi/pbDV1I15ZYIlEGKq9HxdJ7OUtfzzH4QXTkmbnLQRO+4s/xfMEVaEIyZLDyGmnu7LDzbJgpagN+zk0zoGUbHi52XmfhQdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi('T+0+0kzZgup0S3wDUz7hEBPTXOyy+F6yXmuZfWFPlrmFW90hPOEa6ZOzKsQMpLU9A5FJp+nymQ241b4owCYkcBoDihA/uEp7n5SYrVZ0wJrA3m7C63IM+CZo3WaWxI76NfXGPcog+77ZICXZL8HXiwdB04t89/1O/w1cDnyilFU=')
 # Channel Secret
-handler = WebhookHandler('84c75e4b3368d5a69c83549fa955a461')
+handler = WebhookHandler('c74db2f3b611a0c6f4651d231dc71fdb')
 #===========[ NOTE SAVER ]=======================
 notes = {}
 
-def cariayat(reference)
-    URLayat = "http://api.alquran.cloud/ayah"+reference
-    r = requests.get(URLayat)
+#REQUEST NAMA SURAT
+def carisurat(nomorsurat):
+    URLsurat = "https://api.banghasan.com/quran/format/json/surat"+nomorsurat+"/"+"pre"
+    r = requests.get(URLsurat)
     data = r.json()
+    err = "data tidak ditemukan"
 
     status = data['status']
     if(status == "ok"):
-        text = data['data']['text']
-        num = data['data']['surah']['number']
-        nem = data['data']['surah']['name']
-        englishName = data['data']['surah']['englishName']
-        engnemtran = data['data']['surah']['englishNameTranslation']
-        numofay = data['data']['surah']['numberOfAyahs']
-        rt = data['data']['surah']['revelationType']
+        nomor_surat = data['hasil'][0]['nomor']
+        nama_surat = data['hasil'][0]['nama']
+        asma = data['hasil'][0]['asma']
+        ayat = data['hasil'][0]['ayat']
+        arti = data['hasil'][0]['arti']
+        ket = data['hasil'][0]['keterangan']
 
-        data = "Text : "+text+"\nNama_Surat : "+englishName+"\nsuratke- : "+num+"\nAyatke- : "+numofay
+        data = "Surat ke : "+nomor_surat+"\nNama Surat : "+nama_surat+"\nAsma Surat : "+asma+"\nJumlah Ayat : "+ayat+"\nKeterangan : "+ket
         return data
 
     elif(status == "error"):
-        return (err)
+        return err
 
+# Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
@@ -81,9 +85,8 @@ def handle_message(event):
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
 
-    data=text.split('-')
-    if(data[0]=='lihat'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=cariayat(data[1])))
+
+    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carisurat("1")))
 
 import os
 if __name__ == "__main__":
